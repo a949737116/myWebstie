@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="underscore-min.js"></script>
+    <script src="angular.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    body{
+        background-color: slateblue;
+    }
+    .mobile{
+        border:solid 1px #999999;
+        height:500px;
+        display: flex;
+    }
+    .mobile dl
+    {
+        display: flex;
+        flex:1;
+        flex-direction:column-reverse;
+        margin: 0;
+        padding:0;
+    }
+    .mobile dl dt{
+        background: white;
+        border:solid 1px #999;
+        color: black;
+        height:30px;
+        font-weight:lighter;
+        text-align: center;
+        cursor: pointer;
+        border:solid 1px #f3f3f3;
+        line-height:2em;
+    }
+    .mobile dl dd{
+        display: flex;
+        flex-direction:column;
+        text-align: center;
+        border:solid 1px #f3f3f3;
+        background: khaki;
+    }
+    .mobile dl dd a{
+        text-decoration: none;
+        color: #024378;
+    }
+    .top-menu,.top-subMenu{
+        position: relative;
+    }
+    .top-fa,.top-subFa{
+        position: absolute;
+        top:3px;
+        right:5px;
+        font-size: 23px;
+        color: #999;
+        cursor: pointer;
+        display: none;
+    }
+    .top-menu:hover .top-fa,.top-subMenu:hover .top-subFa{
+        display: block;
+    }
+    .marginTop{
+        padding-top: 20px;
+    }
+
+</style>
+<body>
+<h1 style="text-align: center;color: #fff;">微信菜单管理</h1>
+<div class="container" ng-app="hd" ng-controller="mc">
+    <div class="row">
+        <div class="col-xs-4" class="app" >
+            <div class="mobile" style="-webkit-background-size: cover;background-size: cover;background-image: url(img/bg.png);">
+                <dl ng-repeat="v in data.button">
+                    <dt ng-bind="v.name"></dt>
+                    <dd ng-repeat="g in v.sub_button" ng-if="v.type == 'view'"><a href="" ng-bind="g.name"></a></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="col-xs-8 panel panel-default marginTop">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    编译区域
+                </h3>
+            </div>
+            <div class="panel-body">
+                <!--一级菜单-->
+              <div class="panel panel-default top-menu" ng-repeat="(i,v) in data.button">
+                  <i class="fa fa-times top-fa" aria-hidden="true" ng-click="removeTopMenu(v)"></i>
+                  <div class="panel-body">
+                      <div class="form-group" style="height: 30px;">
+                          <label class="col-xs-3 control-label">标题</label>
+                          <div class="col-xs-9">
+                              <input type="text" class="form-control" ng-model="v.name" >
+                          </div>
+                      </div>
+                      <div class="form-group" style="height: 30px;">
+                          <label class="col-xs-3 control-label">类型</label>
+                          <div class="col-xs-9">
+                              <div class="radio">
+                                   <label class="radio-inline">
+                                      <input type="radio" value="click" ng-model="v.type">关键词
+                                  </label>
+                                  <label class="radio-inline">
+                                      <input type="radio" value="view" ng-model="v.type">网址
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group" style="height: 30px;" ng-if="v.type == 'click' && !v.sub_button">
+                          <label  class="col-xs-3 control-label">关键词</label>
+                          <div class="col-xs-9">
+                              <input type="text" class="form-control" ng-model="v.key">
+                          </div>
+                      </div>
+                      <div class="form-group" style="height: 30px;" ng-if="v.type == 'view' && !v.sub_button ">
+                          <label  class="col-xs-3 control-label">链接</label>
+                          <div class="col-xs-9">
+                              <input type="text" class="form-control" ng-model="v.url">
+                          </div>
+                      </div>
+                      <button class="btn btn-success" type="button" ng-click="add1()">添加一级菜单</button>
+                      <button class="btn btn-danger" type="button" ng-click="delete1(i)">删除该一级菜单</button>
+                      <button class="btn btn-warning" type="button" ng-click="add_2(v)" ng-if="v.type == 'view' && !v.sub_button">手动添加二级菜单</button>
+                      <!--二级菜单-->
+                      <div class="panel panel-default top-subMenu" ng-if="v.type=='view'" ng-repeat="(i,c) in v.sub_button" style="margin-top: 30px">
+                             <i class="fa fa-times top-subFa" style="font-size: 16px" ng-click="removeSubMenu(v,c)" aria-hidden="true" ></i>
+                             <div class="panel-body">
+                                 <div class="form-group"style="height: 30px;">
+                                     <label class="col-xs-3 control-label" >标题</label>
+                                     <div class="col-xs-9">
+                                         <input type="text" class="form-control" ng-model="c.name">
+                                     </div>
+                                 </div>
+                                 <div class="form-group"style="height: 30px;">
+                                     <label class="col-xs-3 control-label">类型</label>
+                                     <div class="col-xs-9 inline-radio">
+                                         <div class="radio">
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="click" ng-model="c.type">关键词
+                                             </label>
+                                             <label class="radio-inline">
+                                                 <input type="radio" value="view" ng-model="c.type">网址
+                                             </label>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="form-group"style="height: 30px;" ng-if="c.type == 'view'">
+                                     <label class="col-xs-3 control-label" >链接</label>
+                                     <div class="col-xs-9">
+                                         <input type="text" class="form-control" ng-model="c.url">
+                                     </div>
+                                 </div>
+                                 <div class="form-group"style="height: 30px;" ng-if="c.type == 'click'">
+                                     <label class="col-xs-3 control-label" >关键词</label>
+                                     <div class="col-xs-9" >
+                                         <input type="text" class="form-control" ng-model="c.key">
+                                     </div>
+                                 </div>
+                                 <button class="btn btn-danger" type="button" ng-click="delete2(v,i)">删除该二级菜单</button>
+                                 <button class="btn btn-info" ng-if="$last" type="button" ng-click="add2(v)">添加二级菜单</button>
+                             </div>
+                      </div>
+                      <!--二级菜单结束-->
+                  </div>
+              </div>
+            </div>
+            <!--<div class="panel-body">
+                &lt;!&ndash;一级菜单&ndash;&gt;
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group" style="height: 30px;">
+                            <label  class="col-xs-2 control-label">标题</label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 30px;">
+                            <label  class="col-xs-2 control-label">链接</label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="form-group"style="height: 30px;">
+                                    <label class="col-sm-2" control-label>标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="请输入信息">
+                                    </div>
+                                </div>
+                                <div class="form-group"style="height: 30px;">
+                                    <label class="col-sm-2" control-label>链接</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" placeholder="请输入信息">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-info">添加菜单</button>
+                    </div>
+                </div>
+                &lt;!&ndash;一级菜单结束&ndash;&gt;
+                <button class="btn btn-success">添加一级菜单</button>
+            </div>-->
+        </div>
+    </div>
+</div>
+<script>
+    /*var d = [1,2,3,4,5];
+    e = _.without(d,2,4);//移除d中的2和4
+    console.log(e);*/
+    var app = angular.module('hd',[]);
+    app.controller('mc',['$scope',function($scope){
+        $scope.data={
+            "button":[
+                {
+                    "type":"click",
+                    "name":"今日歌曲",
+                    "key":"V1001_TODAY_MUSIC"
+                },
+                {
+                    "type":"view",
+                    "name":"王者荣耀",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"998礼包",
+                            "url":"http://www.soso.com/"
+                        },
+                        {
+                            "type":"view",
+                            "name":"抽不知火舞",
+                            "url":"http://www.soso.com/"
+                        }
+
+                    ]
+                },
+                {
+                    "type":"view",
+                    "name":"菜单",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"搜索",
+                            "url":"http://www.soso.com/"
+                        },
+                        {
+                            "type":"view",
+                            "name":"视频",
+                            "url":"http://v.qq.com/"
+                        },
+                        {
+                            "type":"click",
+                            "name":"赞一下我们",
+                            "key":"V1001_GOOD"
+                        }]
+                }]
+        };
+        $scope.add1 = function(){
+            var menu = {
+              "type":"click",
+                "name":"",
+                "key":""
+            };
+            if ($scope.data.button.length > 3)
+            {
+                alert("一级菜单数量超过限制！！");
+            }else{
+            $scope.data.button.push(menu);}
+        };
+        $scope.add2 = function(item){
+            var menu = {
+                "type":"view",
+                "name":"二级菜单链接",
+                "url":"www.baidu.com"
+            };
+            if (item.sub_button.length ==5){
+                alert("二级菜单数量超过限制!");
+            }else{
+             item.sub_button.push(menu)
+            }
+        };
+        $scope.add_2 = function(item){
+            item.sub_button = [{
+                "type":"view",
+                "name":"二级菜单链接",
+                "url":"www.baidu.com"
+            }];
+        };
+        $scope.delete1 = function(index){
+            if ($scope.data.button.length == 1){
+                alert("一级菜单数量不得少于1");
+                return false;
+            }else
+            {$scope.data.button.splice(index,1)}
+        }
+        $scope.delete2 = function(v,index){
+            v.sub_button.splice(index,1)
+        };
+        $scope.removeTopMenu = function(item){
+            var a = _.without($scope.data.button, item);
+            if ($scope.data.button.length == 1){
+                alert("一级菜单数量不得少于1");
+                return false;
+            }else
+            {$scope.data.button = a;}
+        };
+        $scope.removeSubMenu = function (v,c) {
+            var a = _.without(v.sub_button,c);
+            v.sub_button = a;
+        }
+    }]);
+</script>
+</body>
+</html>

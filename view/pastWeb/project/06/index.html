@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mp" >
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎来到马可波罗的神秘商店</title>
+    <script src="org/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="org/bootstrap.min.css">
+    <script src="org/bootstrap.min.js"></script>
+    <script src="org/angular.min.js"></script>
+    <script src="org/angular-ui-router.js"></script>
+    <script src="org/require.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        #show{
+            z-index:1;
+            background-color: #761c19;
+        }
+    </style>
+</head>
+<body >
+<div>
+    <div ui-view="top"></div>
+    <div ui-view="container" id="show"></div>
+    <div ui-view="footer"></div>
+</div>
+</body>
+</html>

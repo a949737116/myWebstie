@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>植物大战瘸腿僵尸</title>
+    <style type="text/css">
+        *{margin:0;padding:0;font-size:12px;font-family:微软雅黑;}
+        body{background: url('images/bg.jpg') no-repeat;-webkit-background-size: cover;background-size: cover;overflow-y: scroll;}
+        #dAll{overflow:hidden;border:3px outset;}
+        #dTop{position:absolute; left: 10px;top:0px; height:35px;visibility:visible;width:123px;z-index:1;display:none;}
+        #dSunNum{position:absolute;background:url("images/interface/SunBack.png") no-repeat;
+            width:123px;  height:35px;}
+        #sSunNum{
+            text-align: center;position:absolute;top:3px;left:43px;width:68px;
+            font-family:Verdana;font-weight: bold;font-size:22px}
+        #dCardList{  visibility: visible; position:absolute;top:40px;  left:3px; width: 100px;overflow: visible;z-index:254; display: none;}
+        #dCardList div{cursor:pointer;position:relative;  height:60px;}
+        #dCardList img {
+            width:100px;height:60px;position:absolute;}
+        #dCardList span{cursor:pointer;position:absolute;  left:66px; top:40px;width:34px;height:20px;font-size:11pt;}
+        #dPlants,#dZombies{
+            border: 10px red;
+            position: absolute;  top:0px;  left:0px;
+            z-index: 999;
+        }
+        #dPlants div{
+            position: absolute; top:294px;
+            z-index:999;}
+        #dPlants img{
+            position: absolute;
+            z-index: 999;}
+        #dZombies div{
+            position: absolute; top:294px;
+            z-index:999;}
+        #dZombies img{
+            position: absolute;
+            z-index: 999;
+        }
+    </style>
+    <script src="jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="script/index.js"></script>
+</head>
+<body>
+<div class="WindowFrame" id="dAll" style="position: absolute;top: 0;width:900px;height:600px;background: #000;">
+    <!--背景图片-->
+    <div style="width: 1400px;height: 600px;position: absolute;top: 0px;left: 0px; visibility: hidden;z-index: 0;" id="tbg">
+        <!--分数牌-->
+        <div id="dTop">
+            <div id="dSunNum">
+                <span id="sSunNum">80</span>
+            </div>
+        </div>
+        <!--植物卡-->
+        <div id="dCardList">
+            <div id="dCardPeashooter">
+                <img src="images/Card/Plants/Peashooter.png" alt="">
+                <img src="images/Card/Plants/PeashooterG.png" style="visibility:hidden;" alt="">
+                <span id="sSunNum0">100</span>
+            </div>
+        </div>
+
+    </div>
+    <!--出场僵尸显示区域-->
+    <div style="width: 350px;height: 600px;position: absolute;top: 0px;left: 1400px;z-index: 1" id="zombie"></div>
+    <!--植物容器-->
+    <div id="dPlants"></div>
+    <!--僵尸容器-->
+    <div id="dZombies"></div>
+
+
+</div>
+</body>
+</html>

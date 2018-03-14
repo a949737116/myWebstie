@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<title>会员登录</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<link href="css/login2.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="frame">
+<h1>QQ会员注册<sup>V2020</sup></h1>
+
+<div class="login" style="margin-top:50px;">
+    
+    <div class="header">
+        <div class="switch" id="switch"><a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>
+			<a class="switch_btn" id="switch_login" href="javascript:void(0);" tabindex="8">快速注册</a><div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
+        </div>
+    </div>    
+  
+    
+    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
+
+            <!--登录-->
+            <div class="web_login" id="web_login">
+               
+               
+               <div class="login-box">
+    
+            
+			<div class="login_form">
+				<form action="login.php" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"><input type="hidden" name="did" value="0"/>
+               <input type="hidden" name="to" value="log"/>
+                <div class="uinArea" id="uinArea">
+                <label class="input-tips" for="u">帐号：</label>
+                <div class="inputOuter" id="uArea">
+                    
+                    <input type="text" id="u" name="username" class="inputstyle"/>
+                </div>
+                </div>
+                <div class="pwdArea" id="pwdArea">
+               <label class="input-tips" for="p">密码：</label> 
+               <div class="inputOuter" id="pArea">
+                    
+                    <input type="password" id="p" name="pass" class="inputstyle"/>
+                </div>
+                </div>
+               
+                <div style="padding-left:50px;margin-top:20px;"><input type="submit" value="登 录" style="width:150px;" class="button_blue"/></div>
+              </form>
+           </div>
+           
+            	</div>
+               
+            </div>
+            <!--登录end-->
+  </div>
+
+
+
+
+    <div class="qlogin" id="qlogin" style="display: none; ">
+
+    <div class="web_login">
+            <form name="form2" id="regUser" accept-charset="utf-8"  action="register.php" method="post">
+                <input type="hidden" name="to" value="reg"/>
+                <input type="hidden" name="did" value="0"/>
+                <ul class="reg_form" id="reg-ul">
+                    <div id="userCue" class="cue">快速注册请注意格式</div>
+                    <div class="cl"></div>
+                    <table border="0" width="300" align="center">
+                        <tbody class="tbody">
+                        <tr>
+                            <td>用户名：</td>
+                            <td>
+                                <input type="text"  id="namebar" name="user" onblur="nameCheck()" placeholder="必须英文开头长度6至12位">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>密码：</td>
+                            <td>
+                                <input type="password" id="passwordBar" name="passwd" onblur="passCheck()" placeholder="6-12位">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>重复密码：</label></td>
+                            <td>
+                                <input type="password" id="passwordBar2" name="pass" onblur="passCheck2()" placeholder="再输入一次密码">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>昵称：</td>
+                            <td>
+                                <input type="text" id="nicknameBar" name="tele" onblur="nicknameCheck()" placeholder="中文字符2-5位">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>性别：</td>
+                            <td>
+                                <span class="radioBox on" id="s1"><input type="radio" onclick="javascript:click1();" value="man" name="sex" class="radioBtn" ></span>男
+                                <span class="radioBox off" id="s2"><input type="radio" class="radioBtn" value="woman" name="sex" onclick="javascript:click2()" ></span>女</td>
+                        </tr>
+                        <tr>
+                            <td>手机号码：</td>
+                            <td>
+                                <input type="text" id="phone" onblur="phoneCheck()">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-right: 17px">
+                                <img src="images/code.php" alt="" onclick="this.src='images/code.php?'+ Math.random()">
+                            </td>
+                            <td>
+                                <input type="text" id="a" name="user1" size="6">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td><td><input type="submit" value="提交注册"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ul></form>
+        </div>
+   
+    
+    </div>
+
+</div>
+<div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问页面</div>
+</body>
+<script src="js/jquery-3.1.1.js"></script>
+<script>
+    var box = document.getElementById("userCue");
+    function click1(){
+        $("#s1").removeClass("off");
+        $("#s1").addClass("on");
+        $("#s2").removeClass("on");
+        $("#s2").addClass("off");
+    }
+    function click2(){
+        $("#s2").removeClass("off");
+        $("#s2").addClass("on");
+        $("#s1").removeClass("on");
+        $("#s1").addClass("off");
+    }
+    function nameCheck(){
+        box.innerHTML = "提交前请检查红色框";
+        var num = $("#namebar").val();
+        var reg = /^[a-zA-Z][a-zA-Z0-9]{5,11}$/;
+        var reg1 = /\S+/;
+        $("#namebar").css("border-color","#ccc");
+        if (reg1.test(num) == false){
+            box.innerHTML = "用户名不能为空";
+            $("#namebar").css("border-color","red");
+            return false;
+        }
+        if (reg.test(num) == false){
+            box.innerHTML="请按照要求输入用户名";
+            $("#namebar").css("border-color","red");
+            return false;
+        }
+    }
+    function passCheck() {
+        box.innerHTML = "提交前请检查红色框";
+        var num = $("#passwordBar").val();
+        $("#passwordBar").css("border-color","#ccc");
+        var reg1 = /\S+/;
+        var reg = /^[a-zA-Z0-9]{6,12}$/;
+        if(reg1.test(num) == false){
+            $("#passwordBar").css("border-color","red");
+            box.innerHTML = "密码不能为空";
+            return false;
+        }
+        if (reg.test(num) == false){
+            $("#passwordBar").css("border-color","red");
+            box.innerHTML = "请按要求输入密码";
+            return false;
+        }
+    }
+    function passCheck2() {
+        box.innerHTML = "提交前请检查红色框";
+        $("#passwordBar2").css("border-color","#ccc");
+        var num = $("#passwordBar2").val();
+        var num2 = $("#passwordBar").val();
+        console.log(num || num2);
+        var reg1 = /\S+/;
+        var reg = /^[a-zA-Z0-9]{6,12}$/;
+        if(reg1.test(num) == false){
+            $("#passwordBar2").css("border-color","red");
+            box.innerHTML = "密码不能为空";
+            return false;
+        }
+        if (reg.test(num) == false){
+            $("#passwordBar2").css("border-color","red");
+            box.innerHTML = "请按要求输入密码";
+            return false;
+        }
+        if (num != num2){
+            $("#passwordBar2").css("border-color","red");
+            box.innerHTML = "两次密码输入不一样";
+            return false;
+        }
+    }
+    function nicknameCheck(){
+        box.innerHTML = "提交前请检查红色框";
+        var reg =/^[\u4e00-\u9fa5]{2,5}$/;
+        var num = $("#nicknameBar").val();
+        $("#nicknameBar").css("border-color","#ccc");
+        if (reg.test(num) == false){
+            $("#nicknameBar").css("border-color","red");
+            box.innerHTML = "请按要求输入昵称";
+            return false;
+        }
+    }
+    function phoneCheck(){
+        box.innerHTML = "提交前请检查红色框";
+        var reg =/^1[0-9]{10}$/;
+        var num = $("#phone").val();
+        $("#phone").css("border-color","#ccc");
+        if (reg.test(num) == false){
+            $("#phone").css("border-color","red");
+            box.innerHTML = "请按要求输入手机";
+            return false;
+        }
+    }
+</script>
+</html>

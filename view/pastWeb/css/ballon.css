@@ -1,0 +1,169 @@
+/*-------- 天空背景以及动画 --------*/
+.stage {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    background: #e4b9c0;
+}
+.dargon{
+    position: absolute;
+    z-index:990;
+    -webkit-animation:fly 15s none infinite;
+    -o-animation:fly 15s none infinite;
+    animation:fly 15s none infinite;
+}
+@keyframes fly {
+    0% {  display: block;top:0%;  right:0%;}
+    80%{  top:60%;
+          right:40%;}
+    100%{  top:100%; right:90%;;display: none;}
+}
+
+
+
+.myText{
+    font-size:20px;
+    font-family: "Kristen ITC","微软雅黑";  }
+.paper{
+    z-index:998;
+    position: absolute;
+    visibility: hidden;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-image:url("../images/bg.jpg");
+}
+.stage1{
+    animation:backgroundChange 8s linear infinite alternate;
+}
+@keyframes backgroundChange {
+    0%{
+        background: rgb(255,227,80);}
+    25%{background:rgb(145,222,179);}
+    50%{background: rgb(88,87,186)}
+    75%{background:deepskyblue}
+    100%{background: #212121}
+}
+.tietaChange{
+    animation:ChangeTieTa 1.3s forwards;
+}
+@keyframes ChangeTieTa{
+    0%{z-index:999;}
+    100%{
+        z-index:999;
+        height:56%;
+        bottom:-27%;
+        left:0%;}
+}
+
+/*-------- 气球以及动画 --------*/
+.balloon {
+    cursor: pointer;
+    position: absolute;
+    z-index: 3;
+    top: 5%;
+    height: 227px;
+    width: 157px;
+}
+.text{font-family: 微软雅黑;
+    font-size:16px; }
+.myh2{
+    color: gold;
+    font-family: 幼圆;}
+.balloon1{animation:Action1 8s linear infinite alternate;}
+@keyframes Action1{
+    0%{right:-157px;
+        -webkit-transform:rotate(0deg)}
+    25%{right:25%;
+        -webkit-transform: rotate(40deg)}
+    50%{
+        right:50%;
+        -webkit-transform:rotate(80deg)
+    }
+    75%{
+        right:75%;
+        -webkit-transform: rotate(40deg);
+    }
+    100%{
+        right:100%;
+        -webkit-transform: rotate(0deg);
+    }
+
+
+}
+.tieta{
+    position: absolute;
+    z-index:5;
+    width:36%;
+    height:67%;
+    bottom:11%;
+    left:30%;
+
+}
+
+/*-------- 城市场景图片 --------*/
+.skyline {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    bottom: 29%;
+    height: 147px;
+}
+.beans {
+    position: absolute;
+    z-index: 4;
+    height: 201px;
+    width: 88px;
+    bottom: 25%;
+    left: 59%;
+}
+.ground {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.ground.front {
+    z-index: 30;
+    height: 301px;
+}
+.ground.mid {
+    z-index: 20;
+    height: 299px;
+}
+.ground.back {
+    z-index: 10;
+    height: 281px;
+}
+.dowEventCenter {
+    position: absolute;
+    z-index: 9;
+    bottom: 11%;
+    left: 2%;
+    height: 236px;
+    width: 524px;
+}
+.planetarium {
+    position: absolute;
+    z-index: 3;
+    bottom: 15%;
+    right: -14%;
+    height: 285px;
+    width: 347px;
+}
+.friendshipShell {
+    position: absolute;
+    z-index: 21;
+    bottom: -2%;
+    left: 16%;
+    height: 370px;
+    width: 231px;
+}
+.glockenspiel {
+    position: absolute;
+    z-index: 11;
+    bottom: 15%;
+    right: 37%;
+    height: 263px;
+    width: 137px;
+}

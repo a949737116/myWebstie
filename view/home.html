@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="css/home.css">
+<div id="gif">
+    <div class="container ">
+        <div class="row margin-box">
+            <div class="col-xs-6">
+                <div class="fadeBox">
+                    <h1>Welcome To My WebSite</h1>
+                    <h2>欢迎来到我的小屋</h2>
+                    <button class="btn btn-danger Rbtn">Relax</button>
+                </div>
+            </div>
+            <div class="col-xs-6">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".fadeBox button").click(function () {
+            $(".fadeBox").removeClass('show');
+            $(".fadeBox").addClass('hide');
+            $("#gif").css('background-image','url("imgs/homeBg.jpg")');
+            setTimeout(function () {
+                $("#gif").css('background-image','url("imgs/bg.jpg")');
+                $(".fadeBox").removeClass('hide');
+                $(".fadeBox").addClass('show');
+            },11000)
+        });
+        setTimeout(
+                function(){
+                    $(".fadeBox h1").addClass('animated slideInUp');
+                    $('.fadeBox h1').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                        $(".fadeBox h1").removeClass('animated slideInUp');
+                        $(".fadeBox h1").addClass('show');
+                        $(".fadeBox h2").addClass('animated slideInUp');
+                        $('.fadeBox h2').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                            $(".fadeBox h2").removeClass('animated slideInUp');
+                            $(".fadeBox h2").addClass('show');
+                            $(".fadeBox button").addClass('animated slideInUp');
+                            $('.fadeBox button').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                                $(".fadeBox button").removeClass('animated slideInUp');
+                                $(".fadeBox button").addClass('show');
+                            })
+                        })
+
+                    });
+                },1000);
+    </script>
+</div>
+

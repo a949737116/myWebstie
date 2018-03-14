@@ -1,0 +1,103 @@
+.top-bar{
+    padding: 10px 0;
+    background: #191919;
+    border-bottom: 1px solid rgba(111, 101, 140, 0.45);
+    line-height: 28px;
+}
+.PhoneNum{
+    color: #fff;
+}
+.contact,.PhoneNum p,.contact ul{
+    margin-bottom: 0px;
+    height: 22px;
+    font-size: 15px;
+    line-height: 22px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.contact{
+    color: #fff;
+    text-align: right;
+}
+.navBtn ul,.contact ul{
+    display: inline-block;
+}
+.contact ul li{
+    display: inline-block;
+    margin-right: 8px;
+}
+.contact ul li a{
+    outline: none;
+    display: inline-block;
+    color: #fff;
+    background: #404040;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 2px;
+}
+.contact ul li a:hover{
+    border: none;
+    background-color: #c52d2f;
+    -webkit-transition:background-color 300ms;
+    -moz-transition:background-color 300ms;
+    -o-transition:background-color 300ms;
+    transition:background-color 300ms;
+}
+.input-search {
+    background: transparent;
+    border: 0 none;
+    width: 60px;
+    padding: 0 10px;
+    color: #FFF;
+    transition: all 400ms;
+}
+.input-search:hover{
+    width: 150px;
+    border:1px solid dodgerblue;
+    border-radius:2px;
+    transition: all 400ms;
+}
+.navbar-top{
+    border-radius: 0;
+    margin-bottom: 0;
+    background: #151515;
+    padding: 15px 0;
+    padding-bottom: 0;
+    border: none;
+}
+.logo{
+    padding-top:0px;
+    margin-bottom: 24px;
+}
+.logo img{
+    width:96px;
+    height:63px;
+}
+.navBtn{
+    padding-top: 13px;
+}
+.navBtn li{
+    display: inline-block;
+    padding: 2px 20px;
+}
+.navBtn li a{
+    text-decoration: none;
+    padding: 3px 6px;
+    padding-bottom: 7px;
+    font-family: 黑体;
+    font-size: 20px;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 24px;
+    display: inline-block;
+}
+.active a{
+    background-color: #c52d2f;
+}
+.navBtn li a:hover{
+    background-color: #c52d2f;
+}
+.slowSpeed{
+    animation-duration: 3s;
+}

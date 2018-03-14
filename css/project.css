@@ -1,0 +1,58 @@
+#project{
+    background: #000 url(../imgs/project/bg_projects.png);
+    background-size: cover;
+    padding:70px 0;
+}
+#project .ProjectWall img{
+    width:100%;
+    z-index: 1;
+}
+.ProjectWall .col-xs-12.col-sm-6.col-md-3.col-lg-3{
+    padding:0;
+}
+#project .Title{
+    color: #fff;
+    padding-bottom:40px ;
+    text-align: center;
+}
+#project .Title p{
+    margin-top: 20px;
+    font-family: 幼圆;
+    font-size: 16px;
+}
+#project .Title h2{
+    font-family: "Kristen ITC";
+}
+#project .hidden-panel{
+    position: absolute;
+    top:0;
+    left:0;
+    padding:30px 30px;
+    background-color: #c52d2f;
+    z-index: 99;
+    height: 100%;
+    opacity: 0;
+}
+#project .hidden-panel:hover{
+    opacity: 1;
+    -webkit-transition: opacity 400ms;
+    -moz-transition: opacity 400ms;
+    -ms-transition: opacity 400ms;
+    -o-transition: opacity 400ms;
+    transition: opacity 400ms;
+}
+#project .hidden-panel .content,#project .hidden-panel .content h3 a{
+    color: #fff;
+    font-family: 黑体;
+    text-decoration: none;
+}
+#project .hidden-panel .content h3{
+    margin-top: 0px;
+}
+#project .hidden-panel .content a{
+    color: rgb(245, 214, 57);
+    text-decoration: none;
+    font-size: 18px;
+}
+
+

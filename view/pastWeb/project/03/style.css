@@ -1,0 +1,23 @@
+#MainBox{
+    float: left;
+}
+#SettingBox{
+    margin-top: 500px;
+    margin-left: 500px;
+    width: 800px;
+    height: 400px;
+    border: 2px orchid solid;
+    background: palegreen;
+    opacity: 0.5;
+    float: left;
+    text-align: center;
+    font-size: 30px;
+}
+#SettingBox h2{
+    color: mediumblue;
+    font-size: 50px;
+}
+#startGame{
+    width:200px;
+    height: 60px;
+}

@@ -1,0 +1,24 @@
+.fadeBox{
+    visibility: hidden;
+    color:#08225;
+
+}
+.fadeBox h2{
+    margin-bottom: 30px;
+}
+.fadeBox button{
+    font-family: "Kristen ITC";
+    font-size: 20px;
+}
+.show{
+    visibility: visible!important;
+}
+.hide{
+    visibility: hidden;
+}
+#gif{
+    height:730px;
+    background: url("../imgs/bg.jpg") no-repeat;
+    -webkit-background-size:100% 100%;
+    background-size:100% 100%;
+}

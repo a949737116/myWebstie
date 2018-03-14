@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/ballon.css">
+    <link rel="stylesheet" href="css/3d.css" type="text/css">
+    <title>欢迎来到我的小屋</title>
+</head>
+<body style="height:100%;overflow: hidden;"onbeforeunload="checkRefesh()">
+<!--等待加载页面-->
+<div class="loader" style="background-color: #bd4932; width:106%; height: 100%">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div id="object"></div>
+            <p class="words" >Loading...</p>
+        </div>
+    </div>
+
+</div>
+<div class="dargon">
+    <img src="images/dargon.gif" width=50% height=50% alt="">
+</div>
+<!--雨滴画布-->
+<canvas id="myCanvas" rainDrops="3000" windPower="2" direction="right"></canvas>
+<!--名片-->
+<div class="idCard">
+    <div class="icard">
+        <p>QQ邮箱: 949737116@qq.com </p>
+</div>
+</div>
+<!--主体结构-->
+<div class="main-body">
+    <!--锚链接-->
+    <a href="#" name="mao"></a>
+   <!-- 主体部分-->
+    <div class="container">
+        <div class="row">
+            <div class="main-page">
+                <!--左侧栏部分-->
+                <aside class="main-navigation">
+                    <!--左侧栏主体-->
+                    <div class="main-menu stage3d">
+                        <!--Home Div-->
+                        <div class="menu-container son3d">
+                            <div class="block-keep-ratio block-keep-ratio-2-1 block-width-full home ">
+                                <a href="index.html" class="block-keep-ratio__content  main-menu-link ahome">
+                                        <span class="main-menu-link-text">
+                                            Home
+                                        </span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--About Contact DIV-->
+                        <div class="menu-container forCartoon">
+                            <div class="block-keep-ratio  block-keep-ratio-1-1  block-width-half  pull-left about  ">
+                                <a href="javascript:idCard();"
+                                   class="main-menu-link about block-keep-ratio__content flexbox-center">
+                                    <i class="fa fa-user fa-4x main-menu-link-icon"></i>
+                                    Contact
+                                </a>
+                            </div>
+
+                            <div class="block-keep-ratio  block-keep-ratio-1-1  block-width-half  pull-right  contact-main contact ">
+                                <a href="javascript:contact();" class="main-menu-link block-keep-ratio__content flexbox-center">
+                                    <i class="fa fa-envelope-o fa-4x main-menu-link-icon"></i>
+                                    About
+                                </a>
+                            </div>
+                        </div>
+                        <!--轮播图和左右按钮-->
+                        <div class="menu-container slidebox ">
+                            <div class="mauris">
+                                <div id="carousel-menu" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item slidebox">
+                                            <img src="images/slid4.gif" alt="slider" class="slidebox-img">
+                                            <div class="carousel-caption menu-caption cn">
+                                                萌猫
+                                            </div>
+                                        </div>
+                                        <div class="item slidebox">
+                                            <img src="images/slide5.jpg" alt="slider" class="slidebox-img">
+                                            <div class="carousel-caption menu-caption cn">
+                                                变形金刚
+                                            </div>
+                                        </div>
+                                        <div class="item slidebox">
+                                            <img src="images/slide3.jpg" alt="slider" class="slidebox-img">
+                                            <div class="carousel-caption menu-caption cn">
+                                                环太平洋3
+                                            </div>
+                                        </div>
+                                        <div class="item slidebox active">
+                                            <img src="images/slide6.gif" alt="slider" class="slidebox-img">
+                                            <div class="carousel-caption menu-caption cn">
+                                                战争女神
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <a class="left carousel-control" href="#carousel-menu" role="button"
+                                       data-slide="prev">
+                                        <span class="fa fa-caret-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-menu" role="button"
+                                       data-slide="next">
+                                        <span class="fa fa-caret-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!--气球部分-->
+                <div class="content-main ball">
+                    <div class="row margin-b-30">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="stage stage1">
+                                <div class="paper">
+                                    <div class="container">
+                                        <h2 class="myh2">本站作者</h2>
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+                                                <img src="images/touxiang.jpg" alt="" width="100%" height="60%">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="col-md-9">
+                                                    <p class="myText" id="myText">本人就读于广东技术师范学院，自学前端及其他计算机语言，掌握HTML、CSS、Less/Sass、JS、JQ、BootStrap、Node.js、Gulp、Ajax、React.js、Angular.js、PHP混合编程、Zepto.js、MySql、SQl、Java等技能，兢兢业业，精益求精。</p>
+                                                    </br><button id="myBtn1" class="btn btn-danger" ele-range>释放文字</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tieta"><img src="images/tieta.png" width="50%" height="50%"></div>
+                                <div class="skyline"><img src="images/skyline.png" width="100%" height="100%"></div>
+                                <div class="beans"><img src="images/beans.png" width="50%" height="50%" alt=""></div>
+                                <div class="ground back"><img src="images/groundBack.png" width="100%" height="100%">
+                                </div>
+                                <div class="ground mid"><img src="images/groundMid.png" width="100%" height="100%">
+                                </div>
+                                <div class="ground front"><img src="images/groundFront.png" width="100%" height="100%">
+                                </div>
+                                <div class="dowEventCenter"><img src="images/dowEventCenter.png" width="50%"
+                                                                 height="50%"></div>
+                                <div class="planetarium"><img src="images/Planetarium.png" width="50%" height="50%">
+                                </div>
+                                <div class="friendshipShell"><img src="images/friendshipShell.png" width="50%"
+                                                                  height="50%"></div>
+                                <div class="glockenspiel"><img src="images/Glockenspiel.png" width="50%" height="50%">
+                                </div>
+                            </div>
+                              <div class="balloon balloon1"><img src="images/balloon.png" width="60%" height="60%" alt=""></div>
+
+                        </div>
+                    </div>
+                </div>
+
+               <!-- 项目展示部分-->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cardbox">
+                        <!--名片部分-->
+                    </div>
+                    <div class="row margin-b-30 col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <!--QQ会员-->
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="box london">
+                            <div class="box-icon">
+                                <a href="./project/01/index1.html"><img src="images/1.bmp" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="info float-container title1">
+                                <div class="col-sm-12 london-title">
+                                    <h3 class="text-uppercase">自改QQ会员动态页面</h3>
+                                    <h4 class="text-uppercase myh4">&nbsp;css+div</h4>
+                                </div>
+                                <!--<p>这个项目利用Div+Css布置网页格局，PHP编写服务器后台，源生JS响应滚动和页面切换等事件，可实现注册/登录功能，并携带有自制网页播放器可进行多媒体播放。</p>-->
+                                <p style="font-family: 'Kristen ITC'">Both Div+Css web layout pattern and  written in PHP server source are used to the project. At the same time, JS response scrolling and page switching events make a big fuction to which not only can  realize the registration or login function,but also carry a homemade web player for multimedia playback</p>
+                                <hr/>
+                                <div class="col-sm-12 location-main">
+                                    <div class="pull-left location">
+                                        <i class="fa fa-map-marker fa-2x"></i><span>Dynamic Web Page</span>
+                                    </div>
+                                    <div class="pull-right user-icons">
+                                        <a href="#"><i class="fa fa-star fa-2x"></i></a>
+                                        <a href="#"><i class="fa fa-user fa-2x"></i></a>
+                                        <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--新浪云主页-->
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="box paris">
+                            <div class="box-icon">
+                                <a href="./project/02/index.html"><img src="images/2.bmp" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="info float-container title2">
+                                <div class="col-sm-12 london-title paris-title">
+                                    <h3 class="text-uppercase">新浪云主页</h3>
+                                    <h4 class="text-uppercase myh4">&nbsp;BootStrap</h4>
+                                </div>
+                                <p>此网页利用BootStrap框架进行网页制作，媒体查询和栅格系统规划响应式布局，运用Carousel、Collapse
+                                    、Btn等插件，并采用Chrome控制台检查移动端效果。</p>
+                                <hr/>
+                                <div class="col-sm-12 location-main">
+                                    <div class="pull-left location location2">
+                                        <i class="fa fa-map-marker fa-2x"></i><span>Static Web Page</span>
+                                    </div>
+                                    <div class="pull-right user-icons">
+                                        <a href="#"><i class="fa fa-star fa-2x"></i></a>
+                                        <a href="#"><i class="fa fa-user fa-2x"></i></a>
+                                        <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+               <!-- 项目展示部分2-->
+                <div class="row">
+                    <!--其他项目-->
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-md-push-4 col-lg-8 col-lg-push-4 box3">
+                        <div class="box bottom-main ">
+                            <div class="info float-container title3">
+                                <div class="col-sm-12 bottom-title">
+                                    <h3 class="text-uppercase">OTHER PROJECTS</h3>
+                                    <h4 class="text-uppercase cn">其他项目</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="bottom-img">
+                                            <a href="./project/03/index.html">
+                                                <img src="images/3.jpg" alt="Image" height="139.64px">
+                                                <p class="first">阴阳师2048小游戏</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="bottom-img">
+                                            <a href="./project/04/index.html">
+                                                <img src="images/home-img-5.jpg" alt="Image" height="139.64px">
+                                                <p class="second">植物大战僵尸简化版</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxs-12 col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                        <div class="bottom-img">
+                                            <a href="./project/05/index.html">
+                                                <img src="images/home-img-6.jpg" height="139.64px" alt="Image">
+                                                <p class="third">一号店首页简化版</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="bottom-desc readmore">More Wonderful ContentS Are Worth To Being
+                                    Expectation...</p>
+                                <hr/>
+                                <div class="col-sm-12 location-main">
+                                    <div class="pull-right bottom-user">
+                                        <a href="#mao"><i class="fa fa-caret-right"></i><span>BACK TO TOP</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!--页脚-->
+    <footer class="row copyright">
+        <p class="copyright">Copyright © 2017 Lizenghao.cn</p>
+    </footer>
+</div>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/text.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

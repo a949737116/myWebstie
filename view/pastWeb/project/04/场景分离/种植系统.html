@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>种植系统</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family:宋体;
+            font-size:12px;
+        }
+        #dAll{
+            width:900px;height:600px;overflow:hidden;border:3px outset;}
+        #dGround{position:absolute;width:1400px;height:600px;visibility:visible;z-index:0;
+            background: url("images/interface/background1unsodded.jpg") -115px 0px no-repeat;}
+        #dGrass{
+            position: absolute;width:770px;height:117px;top:280px;left:132px;z-index:0;background:url("./images/interface/sod1row.png") no-repeat }
+        #dCardList{  visibility: visible; position:absolute;top:0;  left:3px; width: 100px;overflow: visible;z-index:254;}
+        #dCardList div{cursor:pointer;position:relative;  height:60px;}
+        #dCardList img {
+            width:100px;height:60px;position:absolute;}
+        #dCardList span{cursor:pointer;position:absolute;  left:66px; top:40px;width:34px;height:20px;font-size:11pt;}
+    </style>
+    <script>
+        window.onload=function(){
+            var game = document.getElementById("dAll");
+            var Pea = document.getElementById("dCardPeashooter");
+            var img = document.getElementsByTagName("img");
+            var grass = document.getElementById("dGrass");
+            //点击选项卡，选项卡变灰，创建一个植物
+            Pea.onclick = function(){
+                img[0].style.visibility="hidden";
+                img[1].style.visibility = "visible";
+                var PeaShooter = document.createElement("img");
+                PeaShooter.src="images/Plants/Peashooter/Peashooter.gif";
+                PeaShooter.style.zIndex = 999;
+                PeaShooter.style.position="absolute";
+                PeaShooter.style.top= "0px";
+                PeaShooter.style.left = "0px";
+                game.appendChild(PeaShooter);
+                //创建透明射手
+                var PeaShooterG = document.createElement("img");
+                PeaShooterG.src="images/Plants/Peashooter/Peashooter.gif";
+                PeaShooterG.style.zIndex = 999;
+                PeaShooterG.style.position="absolute";
+                PeaShooterG.style.top= "0px";
+                PeaShooterG.style.left = "0px";
+                PeaShooterG.style.opacity = 0.8;
+                PeaShooterG.style.visibility = "hidden";
+                PeaShooterG.style.filter = "alpha(opacity=80)";
+                game.appendChild(PeaShooterG);
+                //位移定位
+                game.onmousemove = function(event){
+                    var e = event || window.event;
+                    PeaShooter.style.left = e.clientX - PeaShooter.offsetWidth/2 + "px";
+                    PeaShooter.style.top = e.clientY - PeaShooter.offsetHeight/2 + "px";
+                    if (e.clientY < grass.offsetTop || e.clientY > grass.offsetTop + grass.offsetHeight - PeaShooter.offsetHeight/2 || e.clientX < grass.offsetLeft || e.clientX > grass.offsetLeft + grass.offsetWidth)
+                    {
+                        PeaShooterG.style.visibility="hidden";
+                        PeaShooter.onclick = function(){
+                            game.removeChild(PeaShooter);
+                            img[1].style.visibility="hidden";
+                            img[0].style.visibility = "visible";
+                            game.onmousemove = null;
+                    }
+                    }
+                    else{
+                            for (var n =1;n<=9;n++){
+                                     PeaShooterG.style.visibility = "visible";
+                                    if (e.clientX > (n-1)/9 * grass.offsetWidth + grass.offsetLeft && e.clientX < n/9 * grass.offsetWidth + grass.offsetLeft )
+                                    {   console.log(n);
+                                        PeaShooterG.style.top = grass.offsetTop + grass.offsetHeight/2 - PeaShooterG.offsetHeight/2 + "px";
+                                        PeaShooterG.style.left = (n-0.5)/9*grass.offsetWidth - 0.5*PeaShooterG.offsetWidth + grass.offsetLeft + "px" ;
+                                        PeaShooter.onclick = function(){
+                                            PeaShooter.style.top = PeaShooterG.offsetTop + "px";
+                                            PeaShooter.style.left = PeaShooterG.offsetLeft + "px";
+                                            game.onmousemove = null;
+                                            img[1].style.visibility="hidden";
+                                            img[0].style.visibility = "visible";
+                                            game.removeChild(PeaShooterG);
+                                            PeaShooter.onclick=null;
+                                        }
+                                    }else{continue;}
+                                }
+                            }
+                    }};
+                //点击取消
+
+            }
+
+    </script>
+</head>
+<body id="dBody" bgcolor="#008080">
+<div id="dAll" class="WindowFrame" style="position: absolute;top: 0; left: 0; background:#000;">
+    <!--背景-->
+    <div id="dGround"></div>
+    <!--草地背景-->
+    <div id="dGrass"></div>
+    <!--植物卡-->
+    <div id="dCardList">
+        <div id="dCardPeashooter">
+            <img src="images/Card/Plants/Peashooter.png" alt="">
+            <img src="images/Card/Plants/PeashooterG.png" style="visibility:hidden;" alt="">
+            <span id="sSunNum0">100</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

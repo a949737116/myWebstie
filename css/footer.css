@@ -1,0 +1,81 @@
+#footer{
+    background: #100808;
+    padding: 20px 0 0;
+    color: #959595;
+}
+#footer .box{
+    text-align: center;
+}
+.copyRight{
+    background: #111;
+    font-size: 13px;
+    text-align: center;
+    color: #555;
+    padding-top: 14px;
+    padding-bottom: 20px;
+    border-top: 1px solid #303030;
+}
+.copyRight .content{
+    text-align: center;
+}
+.box h4{
+    position: relative;
+    font-family: 幼圆;
+    padding-bottom: 5px;
+    color: #fff;
+    border-bottom: 1px solid #303030;
+}
+.box h4:after{
+    content: '';
+    width:60%;
+    height:1px;
+    background: #337ab7;
+    position: absolute;
+    left: 0;
+    bottom: -1px;  }
+.box a{
+    text-decoration: none;
+    color:  #959595;;
+}
+.box a:hover{
+    color: #c52d2f;
+}
+.techLink ul li a{
+    padding:5px 0;
+    display: block;
+
+}
+.techLink ul li a span{
+    padding:10px 0;
+    border-bottom:1px dashed #303030;
+}
+#contactMe{
+    font-size: 18px;
+    font-family: "Kristen ITC";
+}
+.techonoloy{
+    padding-top: 10px;
+}
+.techonoloy a{
+    border: 1px solid #303030;
+    padding: 5px 7px;
+    color: #959595;
+    line-height: 1.5em;
+    display: inline-block;
+    margin: 0 7px 7px 0;
+}
+.techonoloy a:hover{
+    color: #fff;
+    background-color: #337ab7;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+.margin-box,.fadeBox{
+    margin-top: 120px;
+}
+.content1{
+    padding-top: 15px;
+}

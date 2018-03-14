@@ -1,0 +1,119 @@
+<div class="container con" ng-controller="mc">
+    <style>
+        .con .tools{
+            margin-top: 10px;
+            padding-bottom: 20px;
+        }
+        .con{
+            z-index: 999;
+            background-color: #fff;
+            border: 2px solid black;
+        }
+        .con span{
+            font-weight: 600;
+            font-size: 16px;
+            font-family: 黑体;
+        }
+        .con .finalBox{
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 2px dashed #e8e8e8;
+            height: 100px;
+            line-height: 100px;
+            background: #d0e9c6;
+        }
+        .con .finalBox span{
+            font-size: 20px;
+            color: navy;
+            font-family: 方正兰亭超细黑简体;
+        }
+        .dropdown-menu{
+            min-width: 110px!important;
+        }
+    </style>
+    <div class="col-lg-2 tools">
+        <div class="panel panel-primary">
+            <div class="panel-heading">扩展功能</div>
+            <div class="panel-body">
+                <span>搜索：</span>
+                <br>
+                <input type="text" style="width: 120px" ng-model="search">
+                <br>
+                <span>排序：</span>
+                <br>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        商品排序
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a href="#" type="button" ng-click="orderBy('price')">按价格排序</a></li>
+                        <li><a href="#" type="button" ng-click="orderBy('id')">按编号排序</a></li>
+                        <li><a href="#" type="button" ng-click="orderBy('count')">按库存排序</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">网页说明</div>
+            <div class="panel-body" style="font-weight: bold;font-size: 12px;color:sienna ">
+                本项目暂未开放注册/登录、商品详细介绍和支付功能，其他都可正常使用！
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">温馨提醒</div>
+            <div class="panel-body" style="font-weight: bold;font-size: 12px;color:red ">
+                请把您所需要购买的商品打上勾！否则将不会计入购物车！
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 " style="padding-top: 10px">
+        <table class="table">
+            <thead style="background-color: #f5f5f5;border: 1px solid #e8e8e8">
+            <th>状态</th>
+            <th>编号</th>
+            <th>图片</th>
+            <th>名称</th>
+            <th>数量</th>
+            <th>单价</th>
+            <th>总价</th>
+            </thead>
+            <tr ng-repeat="(i,v) in lists">
+                <td>
+                    <input type="checkbox" ng-checked="all" ng-model="v.choose">
+                </td>
+                <td>
+                    {{v.id}}
+                </td>
+                <td>
+                    <img class="img-responsive" ng-src="img/{{v.id}}.jpg" alt="">
+                </td>
+                <td>
+                    <a href="#" style="text-decoration: none;" >{{v.name}}</a>
+                    <p style="margin-top: 5px;color:#9c9c9c" ng-if="i<=6?true:false">[王者荣耀手游官方英雄充值]</p>
+                    <p style="margin-top: 5px;color:#9c9c9c" ng-if="i>=7?true:false">[王者荣耀手游官方皮肤充值]</p>
+                </td>
+                <td>
+                    <button class="btn btn-danger" ng-click="removeGood(v)"> - </button>
+                    {{v.buy}}
+                    <button class="btn btn-primary" ng-click="addGood(v)"> + </button>
+                    <p style="color:#9c9c9c">库存共{{v.count}}件</p>
+                </td>
+                <td>
+                    {{v.price|currency:'￥':1}}
+                </td>
+                <td style="font-weight: bolder;">
+                    {{v.price * v.buy|price}}
+                </td>
+            </tr>
+        </table>
+        <div class="finalBox">
+            <span>总数量：{{totalnum()}}</span> <span style="margin-left: 30px">总价格：{{totalPrice()|price}}</span>
+            <div style="float: right;">
+                <button class="btn btn-info" ng-click="checkAll(true)">全选购物车</button>
+                <button class="btn btn-danger" ng-click="checkAll(false)">反选购物车</button>
+                <button class="btn btn-success">清算购物车</button>
+            </div>
+        </div>
+    </div>
+</div>
