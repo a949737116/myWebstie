@@ -232,11 +232,15 @@ window.onload = function(){
         return js;
     };
     Zombie.prototype.walk = function(){
+        if (this.ZombieWalker){
+            clearInterval(this.ZombieTimer);
+        }
         var This = this;
         var Image = this.js.getElementsByTagName("img");
         Image[1].src= "images/Zombies/Zombie/Zombie.gif";
         this.ZombieWalker = setInterval(function(){
-            This.js.style.left = This.js.offsetLeft - 0.6 + "px";
+            var a = This.js.offsetLeft - 1;
+            This.js.style.left = a + "px";
         },60);
     };
     Zombie.prototype.check = function(){
@@ -313,7 +317,7 @@ window.onload = function(){
         var Image = this.js.getElementsByTagName("img");
         Image[1].src= "images/Zombies/Zombie/ZombieLostHead.gif";
         this.NoHeadWalker = setInterval(function(){
-            This.js.style.left = This.js.offsetLeft - 0.6 + "px";
+            This.js.style.left = This.js.offsetLeft - 1 + "px";
         },60)
     };
     Zombie.prototype.stopWalk = function(){
