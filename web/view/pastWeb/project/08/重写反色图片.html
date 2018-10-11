@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="c1" width="1600" height="1200">
+
+</canvas>
+<script>
+    window.onload = function(){
+        var oc = document.getElementById("c1");
+        var ogc = oc.getContext('2d');
+        var yImg = new Image();
+        yImg.onload = function(){
+                draw(this);
+        };
+        yImg.src="./fanse2.jpg"
+        function draw(obj){
+            oc.width = obj.width * 2;
+            oc.height = obj.height;
+            ogc.drawImage(obj,0,0);
+            var oImg = ogc.getImageData(0,0,obj.width,obj.height);
+            var w = oImg.width;
+            var h = oImg.height;
+            for(var i=0;i<h;i++){
+                for(var j=0;j<w;j++){
+                    var result =[];
+                    var color = getXY(oImg,j,i);
+                    result[0] = 255 - color[0];
+                    result[1] = 255 - color[1];
+                    result[2] = 255 - color[2];
+                    result[3] = 255;
+                    setXY(oImg,j,i,result);
+                }
+            }
+            ogc.putImageData(oImg,obj.width,0);
+        }
+        function getXY(obj,x,y){
+            var w = obj.width;
+            var h = obj.height;
+            var d = obj.data;
+            var color = [];
+            color[0] = d[4*(y*w+x)];
+            color[1] = d[4*(y*w+x)+1];
+            color[2] = d[4*(y*w+x)+2];
+            color[3] = d[4*(y*w+x)+3];
+            return color
+        }
+        function setXY(obj,x,y,color){
+            var w = obj.width;
+            var h = obj.height;
+            var d = obj.data;
+            d[4*(y*w+x)]=color[0];
+            d[4*(y*w+x)+1]=color[1];
+            d[4*(y*w+x)+2]=color[2];
+            d[4*(y*w+x)+3]=color[3];
+        }
+    }
+</script>
+</body>
+</html>

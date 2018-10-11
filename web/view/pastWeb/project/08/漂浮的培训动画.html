@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{background-color: #0c1328;position: absolute;left: 0;top: 0;right: 0;bottom: 0;}
+    </style>
+</head>
+<body>
+<canvas id="c1" width="">
+    您的当前浏览器不支持Canvas
+</canvas>
+</body>
+<script>
+    window.onload=function(){
+        var oc =  document.getElementById('c1');
+        var ogc = oc.getContext('2d');
+        oc.width=document.body.clientWidth;
+        oc.height = document.body.clientHeight;
+        var img = new Image();
+        img.src="isux.png";
+        img.onload=function(){
+            ogc.drawImage(this,(oc.width - this.width)/2,(oc.height - this.height)/2);
+            //变量定义区
+            var odata = ogc.getImageData((oc.width - img.width)/2,(oc.height - img.height)/2,img.width,img.height);
+            ogc.clearRect(0,0,oc.width,oc.height);
+            var percent = 10;
+            var rectData={};
+            var mdata = [];
+            //方法区
+            function randomArr(iAll,iNow){
+                var arr = [];
+                var newArr = [];
+                for(var i = 0;i<iAll.length/4;i++){
+                    arr.push(i);
+                }
+                for(var i = 0;i<iAll.length/(iNow*4);i++){
+                    do{
+                        var x = Math.round(Math.random()*iAll.length/4);
+                        if (x == iAll.length/(iNow*4)){
+                            x = x-1;
+                        }
+                        num  = arr[x] ;
+                    }
+                    while(newArr.indexOf(num) >=0)
+                    newArr.push(num);
+                }
+                return newArr;
+            }
+            function mixit(){
+                var indexArr = randomArr(odata.data,percent);
+                for(var i = 0;i<indexArr.length;i++){
+                    var n = indexArr[i];
+                    rectData.r = odata.data[4*n];
+                    rectData.g = odata.data[4*n +1];
+                    rectData.b = odata.data[4*n +2];
+                    rectData.a = odata.data[4*n +3];
+                    rectData.x = (oc.width - img.width)/2 + n%img.width +(Math.random()-0.5)*20;
+                    rectData.y = (oc.height - img.height)/2 + Math.floor(n/img.width)+(Math.random()-0.5)*30;
+                    if (i%3 == 0){
+                        rectData.startX = rectData.x;
+                        rectData.startY = rectData.y;
+                        rectData.startTime = new Date().getTime() + (Math.random()*20)*1000;
+                        rectData.killTime = new Date().getTime() + (Math.random()*35)*1000;
+                        rectData.speedX = (Math.random()-0.5)*2;
+                        rectData.speedY = (Math.random()-0.5)*2;
+                        rectData.float= true;
+                    }
+                    mdata.push(rectData);
+                    rectData = {};
+                }
+            }
+            function draw(){
+                ogc.clearRect(0,0,oc.width,oc.height);
+                var time = new Date().getTime();
+                for (var i=0;i<mdata.length;i++){
+                    if (mdata[i].float){
+                        if (time>=mdata[i].startTime){
+                            mdata[i].x += mdata[i].speedX;
+                            mdata[i].y += mdata[i].speedY;
+                        }
+                        if (time>=mdata[i].killTime){
+                            mdata[i].x = mdata[i].startX;
+                            mdata[i].y = mdata[i].startY;
+                            mdata[i].startTime = time + (Math.random()*20)*1000;
+                            mdata[i].killTime = time + (Math.random()*35)*1000;
+                        }
+                    }
+                    ogc.beginPath();
+                        ogc.fillStyle = "rgba("+  mdata[i].r +"," + mdata[i].g +"," + mdata[i].b +"," + mdata[i].a  +")";
+                        ogc.fillRect(mdata[i].x,mdata[i].y,1,1);
+                    ogc.closePath();
+
+                }
+            }
+            mixit();
+            setInterval(draw,1000/60);
+        }
+    }
+</script>
+</html>

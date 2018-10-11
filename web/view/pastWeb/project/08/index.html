@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas</title>
+</head>
+<body>
+  <div class='webPage'>
+    <div class='showBox'>
+      <!-- 左边 -->
+      <div class='left'>
+        <iframe src="./漂浮的培训动画.html" frameborder="0" height=400 scrolling=no></iframe>
+        <iframe src="./马赛克.html" frameborder="0" scrolling=no height="200"></iframe>
+        <iframe src="./重写反色图片.html" frameborder="0" scrolling=no height="200"></iframe>
+      </div>
+      <!-- 右边 -->
+      <div class='right'>
+          <iframe src="./射点什么.html" frameborder="0" scrolling=no height=250></iframe>
+          <div class='parts'>
+            <div class='one' style='display: inline-block'>
+                <iframe src="./钟表.html" frameborder="0" scrolling=no width="220" height="220"></iframe>
+            </div>
+            <img src="./show.png" style='margin-bottom: 20px'>
+          </div>
+          <iframe src="./冒泡.html" frameborder="0" scrolling=no height='180'></iframe>    
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<style>
+  body {
+    background-color: black
+  }
+  .webPage {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .showBox {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0px
+  }
+  .left {
+    padding: 10px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .right {
+    padding: 10px 0px 10px 5px;
+    flex:500px 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .right iframe {
+    margin-bottom: 20px;
+    border-radius: 5px
+  }
+  .left iframe {
+    width: 100%;
+    margin: 10px
+  }
+  .parts {
+
+  }
+</style>

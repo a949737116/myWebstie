@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    body{
+        background-color: #000;
+        padding: 0;
+        margin: 0;
+    }
+    canvas{
+        background-color: #fff;
+    }
+    /* #CanvasPanel{
+        width:800px;
+        margin:100px auto;
+    } */
+</style>
+<canvas id="c1" width="800" height="600">
+
+</canvas>
+<!-- <div id="CanvasPanel">
+    <canvas id="c1" width="800" height="600">
+
+    </canvas>
+</div> -->
+<script>
+    window.onload=function(){
+        var oc = document.getElementById("c1");
+        var ogc = oc.getContext('2d');
+        var circleArr = [];
+        setInterval(function(){
+            var x = Math.round(Math.random()*oc.width);
+            var y = Math.round(Math.random()*oc.height);
+            var r = 10;
+            var cr = Math.round(Math.random()*255);
+            var cg = Math.round(Math.random()*255);
+            var cb = Math.round(Math.random()*255);
+            var ca = 1;
+            circleArr.push({
+                x:x,
+                y:y,
+                r:r,
+                cr:cr,
+                cg:cg,
+                cb:cb,
+                ca:ca
+            });
+        },100)
+        setInterval(function(){
+            ogc.clearRect(0,0,oc.width,oc.height);
+            for (var i=0;i<circleArr.length;i++){
+                ogc.moveTo(circleArr[i].x,circleArr[i].y);
+                ogc.beginPath();
+                ogc.fillStyle = "rgba(" + circleArr[i].cr + "," +circleArr[i].cg +"," + circleArr[i].cb +"," + circleArr[i].ca +")";
+                ogc.arc(circleArr[i].x,circleArr[i].y,circleArr[i].r,0,2*Math.PI);
+                ogc.closePath();
+                ogc.fill();
+            }
+            for (var i=0;i<circleArr.length;i++){
+                circleArr[i].r++;
+                circleArr[i].ca -=0.01;
+                if (circleArr[i].ca <=0){
+                    circleArr.splice(i,1);
+                }
+            }
+        },1000/60)
+
+    }
+</script>
+</body>
+</html>

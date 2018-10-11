@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #000;
+        padding: 0;
+        margin: 0;
+    }
+    #c1{
+        background-color: #5784bb;
+    }
+</style>
+<body>
+<canvas id="c1" width="220" height="220">
+
+</canvas>
+<script>
+    var oc = document.getElementById("c1");
+    var ogc = oc.getContext("2d");
+    function todraw(){
+        var x = 110;
+        var y = 110;
+        var r = 100;
+        var min;
+        var sec;
+        var hour;
+        ogc.moveTo(x,y);
+        /*ogc.arc(x,y,r,0,6*Math.PI/180,false);
+        ogc.arc(x,y,r,6*Math.PI/180,12*Math.PI/180,false);*/
+        //秒钟刻度
+        ogc.beginPath();
+            for(var i=0;i<60;i++){
+                ogc.moveTo(x,y);
+                ogc.arc(x,y,r,i*6*Math.PI/180,(i+1)*6*Math.PI/180,false);
+            }
+        ogc.closePath();
+        ogc.stroke();
+
+        ogc.fillStyle="#fff";
+        ogc.beginPath();
+           ogc.moveTo(x,y);
+           ogc.arc(x,y,r-10,0,360*Math.PI/180,false);
+        ogc.closePath();
+        ogc.fill();
+        //15分钟刻度
+        ogc.lineWidth=3;
+        ogc.beginPath();
+            ogc.moveTo(x,y);
+            for(var i =0;i<12;i++){
+                ogc.moveTo(x,y);
+                ogc.arc(x,y,r,i*30*Math.PI/180,(i+1)*30*Math.PI/180,false);
+            }
+        ogc.closePath();
+        ogc.stroke();
+        ogc.beginPath();
+        ogc.moveTo(x,y);
+        ogc.arc(x,y,r-20,0,360*Math.PI/180,false)
+        ogc.closePath();
+        ogc.fill();
+        //时针
+        function drawHours(hour){
+            ogc.strokeStyle="red";
+            ogc.lineWidth=5;
+            ogc.beginPath();
+                ogc.moveTo(x,y);
+                ogc.arc(x,y,r/2,(hour*30-90)*Math.PI/180,(hour*30-90)*Math.PI/180,false);
+            ogc.closePath();
+            ogc.stroke();
+        }
+        //分针
+        function drawMin(min){
+            ogc.strokeStyle="red";
+            ogc.lineWidth=3;
+            ogc.beginPath();
+                ogc.moveTo(x,y);
+                ogc.arc(x,y,r*3/4,(min*6-90)*Math.PI/180,(min*6-90)*Math.PI/180,false);
+            ogc.closePath();
+            ogc.stroke();
+        }
+        //秒钟
+       function drawSec(sec){
+           ogc.lineWidth=2;
+           ogc.strokeStyle="red";
+           ogc.beginPath();
+               ogc.moveTo(x,y);
+               ogc.arc(x,y,r-21,(sec*6-90)*Math.PI/180,(sec*6-90)*Math.PI/180,false);
+           ogc.closePath();
+           ogc.stroke();
+       }
+        //时钟核
+        function DrawClockCenter(){
+            ogc.fillStyle="red";
+            ogc.beginPath();
+            ogc.moveTo(0,0);
+            ogc.arc(x,y,r/17,0,360*Math.PI/180);
+            ogc.closePath();
+            ogc.fill();
+            ogc.fillStyle="#fff";
+            ogc.beginPath();
+            ogc.moveTo(0,0);
+            ogc.arc(x,y,r/30,0,360*Math.PI/180);
+            ogc.closePath();
+            ogc.fill();
+        }
+        //时间转换角度
+        function toChange(){
+            var date = new Date();
+            min = date.getMinutes();
+            hour = date.getHours();
+            sec = date.getSeconds();
+            hour = hour>12?hour-12:hour;
+            hour = min/60 + hour;
+        }
+        //时钟转啊转
+        function runTime(){
+            var timer = setInterval(function(){
+                toChange();
+                //清除画布
+                ogc.fillStyle="#fff";
+                ogc.beginPath();
+                ogc.moveTo(x,y);
+                    ogc.arc(x,y,r-20,0,360*Math.PI/180,false);
+                ogc.closePath();
+                ogc.fill();
+                //时分秒
+                drawHours(hour);
+                drawMin(min);
+                drawSec(sec);
+                //画时钟核
+                DrawClockCenter();
+            },1000);
+        }
+        runTime();
+    };
+    todraw();
+</script>
+</body>
+</html>

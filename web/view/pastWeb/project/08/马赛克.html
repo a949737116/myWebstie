@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    #c1{
+        background-color: white;
+    }
+    body{
+        background-color: black;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+<canvas id="c1">
+
+</canvas>
+<script>
+    window.onload = function(){
+        var oc = document.getElementById("c1");
+        var ogc = oc.getContext('2d');
+        var yImg = new Image();
+        yImg.onload = function(){
+            draw(this);
+        };
+        yImg.src="pubg.jpg"
+        function draw(obj){
+            oc.width = obj.width * 2;
+            oc.height = obj.height;
+            ogc.drawImage(obj,0,0);
+            var oimg = ogc.getImageData(0,0,obj.width,obj.height);
+            var newOimg =ogc.createImageData(obj.width,obj.height);
+            var num = 20;
+            var stepW = obj.width/num;
+            var stepH = obj.height/num;
+            for(var j = 0;j<stepH;j++){
+                for(var i = 0;i<stepW;i++){
+                    var color = getXY(oimg,i*num+Math.round(Math.random()*num),j*num+Math.round(Math.random()*num));
+                    for(var k =0;k<num;k++){
+                        for(var n=0;n<num;n++){
+                            setXY(newOimg,i*num+n,j*num+k,color);
+                        }
+                    }
+                }
+            }
+            ogc.putImageData(newOimg,obj.width,0);
+        }
+        function getXY(obj,x,y){
+            var w = obj.width;
+            var h = obj.height;
+            var d = obj.data;
+            var color = [];
+            color[0] = d[4*(y*w+x)];
+            color[1] = d[4*(y*w+x)+1];
+            color[2] = d[4*(y*w+x)+2];
+            color[3] = d[4*(y*w+x)+3];
+            return color
+        }
+        function setXY(obj,x,y,color){
+            var w = obj.width;
+            var h = obj.height;
+            var d = obj.data;
+            d[4*(y*w+x)]=color[0];
+            d[4*(y*w+x)+1]=color[1];
+            d[4*(y*w+x)+2]=color[2];
+            d[4*(y*w+x)+3]=color[3];
+        }
+    }
+</script>
+</body>
+</html>

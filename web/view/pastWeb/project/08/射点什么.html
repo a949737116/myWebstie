@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    body{
+        background-color: #000;
+        padding: 0;
+        margin: 0;
+    }
+    canvas{
+        background-color: #fff;
+    }
+    /* #CanvasPanel{
+        width:800px;
+        margin:100px auto;
+    } */
+</style>
+<canvas id="c1" width="500" height="250">
+
+</canvas>
+<!-- <div id="CanvasPanel">
+    <canvas id="c1" width="800" height="600">
+
+    </canvas>
+</div> -->
+<script>
+    window.onload=function(){
+        var oc = document.getElementById("c1");
+        var ogc = oc.getContext("2d");
+        var cicrleArr= [];
+        var checkArr = [];
+        setInterval(function () {
+            var color = "rgb(" + Math.round(Math.random()*255) +","+ Math.round(Math.random()*255) +"," + Math.round(Math.random()*255) + ")";
+            cicrleArr.push({
+                x:oc.width/2,
+                y:oc.height-30,
+                r:15,
+                color:color,
+                vX:Math.round(Math.random()*6)-3,
+                vY:-Math.round(Math.random()*5)
+            })
+        },300)
+        setInterval(function(){
+            ogc.clearRect(0,0,oc.width,oc.height);
+            for (var i = 0;i<cicrleArr.length;i++){
+                ogc.moveTo(cicrleArr[i].x,cicrleArr[i].y);
+                ogc.beginPath();
+                ogc.fillStyle=cicrleArr[i].color;
+                ogc.arc(cicrleArr[i].x,cicrleArr[i].y,cicrleArr[i].r,0,2*Math.PI);
+                ogc.closePath();
+                ogc.fill();
+            }
+            for (var i = 0;i<cicrleArr.length;i++){
+                cicrleArr[i].vY += 0.02;
+                cicrleArr[i].x +=cicrleArr[i].vX;
+                cicrleArr[i].y +=cicrleArr[i].vY;
+                if (cicrleArr[i].y>=oc.height-cicrleArr[i].r){
+                    cicrleArr[i].vY = -cicrleArr[i].vY * 0.9;
+                    cicrleArr[i].vX = cicrleArr[i].vX * 0.9;
+                }
+                if (cicrleArr[i].x<=cicrleArr[i].r||cicrleArr[i].x>=oc.width-cicrleArr[i].r|| Math.abs(cicrleArr[i].vX ) <=0.001){
+                    cicrleArr.splice(i,1)
+                }
+            }
+        },1000/60)
+    }
+</script>
+</body>
+</html>
